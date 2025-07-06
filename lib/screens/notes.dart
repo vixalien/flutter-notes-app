@@ -16,7 +16,9 @@ class _NotesScreenState extends State<NotesScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<NoteProvider>().fetchNotes());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NoteProvider>().fetchNotes();
+    });
   }
 
   void _showNoteDialog({Note? note}) {
